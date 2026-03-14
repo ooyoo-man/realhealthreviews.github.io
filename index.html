@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RealHealthReviews — Evidence-Based Health Reviews</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<style>
+  :root {
+    --green-50: #EAF3DE;
+    --green-100: #C0DD97;
+    --green-200: #97C459;
+    --green-600: #3B6D11;
+    --green-800: #27500A;
+    --teal-50: #E1F5EE;
+    --teal-200: #5DCAA5;
+    --teal-600: #0F6E56;
+    --amber-50: #FAEEDA;
+    --amber-600: #854F0B;
+    --gray-50: #F1EFE8;
+    --gray-100: #D3D1C7;
+    --gray-200: #B4B2A9;
+    --gray-600: #5F5E5A;
+    --gray-800: #444441;
+    --gray-900: #2C2C2A;
+    --white: #ffffff;
+    --page-bg: #FAFAF8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--page-bg);
+    color: var(--gray-900);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  nav {
+    background: var(--white);
+    border-bottom: 1px solid var(--gray-100);
+    position: sticky; top: 0; z-index: 100;
+    padding: 0 2rem;
+  }
+  .nav-inner {
+    max-width: 1140px; margin: 0 auto;
+    display: flex; align-items: center; gap: 2.5rem;
+    height: 60px;
+  }
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem; font-weight: 600;
+    color: var(--green-600);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+  }
+  .logo span { color: var(--gray-800); }
+  .nav-links { display: flex; gap: 0; flex: 1; }
+  .nav-links a {
+    font-size: 14px; font-weight: 400;
+    color: var(--gray-600);
+    text-decoration: none;
+    padding: 0 1rem; height: 60px;
+    display: flex; align-items: center;
+    border-bottom: 2px solid transparent;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .nav-links a:hover, .nav-links a.active {
+    color: var(--green-600);
+    border-bottom-color: var(--green-600);
+  }
+  .nav-cta {
+    margin-left: auto;
+    background: var(--green-600);
+    color: var(--white) !important;
+    border: none !important;
+    border-radius: 6px !important;
+    padding: 0 1.2rem !important;
+    height: 36px !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+  }
+  .nav-cta:hover { background: var(--green-800) !important; color: var(--white) !important; }
+
+  /* PAGE SECTIONS */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* HERO */
+  .hero {
+    background: var(--white);
+    border-bottom: 1px solid var(--gray-100);
+    padding: 5rem 2rem 4rem;
+    text-align: center;
+  }
+  .hero-eyebrow {
+    font-size: 12px; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--green-600);
+    margin-bottom: 1rem;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-weight: 600; line-height: 1.15;
+    color: var(--gray-900);
+    max-width: 700px; margin: 0 auto 1.25rem;
+    letter-spacing: -0.02em;
+  }
+  .hero h1 em { color: var(--green-600); font-style: normal; }
+  .hero p {
+    font-size: 1.05rem; color: var(--gray-600);
+    max-width: 520px; margin: 0 auto 2.5rem;
+    font-weight: 300;
+  }
+  .hero-search {
+    max-width: 520px; margin: 0 auto;
+    display: flex; gap: 8px;
+  }
+  .hero-search input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: 1.5px solid var(--gray-100);
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    background: var(--page-bg);
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .hero-search input:focus { border-color: var(--green-200); }
+  .hero-search button {
+    padding: 0.75rem 1.4rem;
+    background: var(--green-600);
+    color: var(--white);
+    border: none; border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px; font-weight: 500;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .hero-search button:hover { background: var(--green-800); }
+
+  /* TRUST BAR */
+  .trust-bar {
+    background: var(--gray-50);
+    border-bottom: 1px solid var(--gray-100);
+    padding: 0.85rem 2rem;
+  }
+  .trust-bar-inner {
+    max-width: 1140px; margin: 0 auto;
+    display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap;
+  }
+  .trust-item {
+    display: flex; align-items: center; gap: 0.5rem;
+    font-size: 13px; color: var(--gray-600); font-weight: 400;
+  }
+  .trust-icon {
+    width: 18px; height: 18px;
+    background: var(--green-100);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .cat-icon svg, .trust-icon svg { width: 20px; height: 20px; }
+  .cat-icon svg { width: 22px; height: 22px; stroke-width: 1.5; }
+  .list-img svg, .review-card-img svg { width: 36px; height: 36px; stroke: var(--gray-400); stroke-width: 1.5; }
+  .review-header-img svg { width: 64px; height: 64px; stroke: var(--gray-200); stroke-width: 1.2; }
+  .method-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+  .method-icon svg { width: 28px; height: 28px; stroke: var(--green-600); stroke-width: 1.5; }
+
+  /* SECTION WRAPPER */
+  .section { padding: 4rem 2rem; max-width: 1140px; margin: 0 auto; }
+  .section-header {
+    display: flex; align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--gray-100);
+    padding-bottom: 1rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; font-weight: 600;
+    color: var(--gray-900); letter-spacing: -0.01em;
+  }
+  .section-link {
+    font-size: 13px; color: var(--green-600);
+    text-decoration: none; font-weight: 500;
+  }
+  .section-link:hover { text-decoration: underline; }
+
+  /* CATEGORY CARDS */
+  .categories-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+  .cat-card {
+    background: var(--white);
+    border: 1px solid var(--gray-100);
+    border-radius: 12px;
+    padding: 1.75rem 1.5rem;
+    cursor: pointer;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    text-decoration: none;
+    display: block;
+  }
+  .cat-card:hover {
+    border-color: var(--green-200);
+    box-shadow: 0 4px 20px rgba(59,109,17,0.07);
+  }
+  .cat-icon {
+    width: 44px; height: 44px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    margin-bottom: 1rem;
+  }
+  .cat-icon.green { background: var(--green-50); }
+  .cat-icon.teal { background: var(--teal-50); }
+  .cat-icon.amber { background: var(--amber-50); }
+  .cat-card h3 {
+    font-size: 15px; font-weight: 500;
+    color: var(--gray-900); margin-bottom: 4px;
+  }
+  .cat-card p {
+    font-size: 13px; color: var(--gray-600); font-weight: 300;
+  }
+  .cat-count {
+    margin-top: 1rem;
+    font-size: 12px; color: var(--green-600);
+    font-weight: 500;
+  }
+
+  /* REVIEW CARDS GRID */
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+  .review-card {
+    background: var(--white);
+    border: 1px solid var(--gray-100);
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .review-card:hover {
+    border-color: var(--green-200);
+    box-shadow: 0 4px 20px rgba(59,109,17,0.07);
+  }
+  .review-card-img {
+    width: 100%; height: 170px;
+    background: var(--gray-50);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 3rem;
+    border-bottom: 1px solid var(--gray-100);
+  }
+  .review-card-body { padding: 1.25rem; }
+  .review-cat-tag {
+    display: inline-block;
+    font-size: 11px; font-weight: 500; letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--green-600);
+    background: var(--green-50);
+    padding: 3px 8px; border-radius: 4px;
+    margin-bottom: 0.6rem;
+  }
+  .review-card h3 {
+    font-size: 15px; font-weight: 500;
+    color: var(--gray-900); margin-bottom: 0.4rem;
+    line-height: 1.35;
+  }
+  .review-card-meta {
+    display: flex; align-items: center; gap: 0.75rem;
+    margin-top: 0.75rem;
+  }
+  .score-badge {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 500;
+    flex-shrink: 0;
+  }
+  .score-high { background: var(--green-50); color: var(--green-800); }
+  .score-mid { background: var(--amber-50); color: var(--amber-600); }
+  .review-verdict {
+    font-size: 12px; color: var(--gray-600);
+    font-weight: 300; line-height: 1.4;
+  }
+
+  /* ---- REVIEW PAGE ---- */
+  .review-page-wrap {
+    max-width: 1140px; margin: 0 auto;
+    padding: 3rem 2rem;
+    display: grid; grid-template-columns: 1fr 300px; gap: 3rem;
+  }
+  .review-main {}
+  .review-breadcrumb {
+    font-size: 13px; color: var(--gray-600);
+    margin-bottom: 1.5rem;
+    display: flex; gap: 6px; align-items: center;
+  }
+  .review-breadcrumb a { color: var(--green-600); text-decoration: none; cursor: pointer; }
+  .review-breadcrumb a:hover { text-decoration: underline; }
+  .review-header-img {
+    width: 100%; height: 260px;
+    background: var(--gray-50);
+    border: 1px solid var(--gray-100);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 5rem;
+    margin-bottom: 2rem;
+  }
+  .review-tag-row { display: flex; gap: 8px; margin-bottom: 1rem; }
+  .review-page-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem; font-weight: 600;
+    color: var(--gray-900); letter-spacing: -0.02em;
+    line-height: 1.2; margin-bottom: 0.75rem;
+  }
+  .review-subtitle {
+    font-size: 1rem; color: var(--gray-600);
+    font-weight: 300; margin-bottom: 2rem;
+    max-width: 620px;
+  }
+  .review-meta-row {
+    display: flex; gap: 1.5rem;
+    padding: 1rem 0; border-top: 1px solid var(--gray-100);
+    border-bottom: 1px solid var(--gray-100);
+    margin-bottom: 2rem;
+  }
+  .review-meta-item { font-size: 13px; color: var(--gray-600); }
+  .review-meta-item strong { color: var(--gray-900); font-weight: 500; display: block; font-size: 14px; }
+
+  /* Score breakdown */
+  .score-section {
+    background: var(--white);
+    border: 1px solid var(--gray-100);
+    border-radius: 12px;
+    padding: 1.75rem;
+    margin-bottom: 2rem;
+  }
+  .score-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem; font-weight: 600;
+    color: var(--gray-900); margin-bottom: 1.25rem;
+  }
+  .overall-score-row {
+    display: flex; align-items: center; gap: 1.5rem;
+    margin-bottom: 1.5rem; padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--gray-100);
+  }
+  .big-score {
+    width: 70px; height: 70px;
+    border-radius: 14px;
+    background: var(--green-50);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.75rem; font-weight: 500; color: var(--green-800);
+    flex-shrink: 0;
+  }
+  .overall-verdict { font-size: 14px; color: var(--gray-600); font-weight: 300; line-height: 1.5; }
+  .overall-verdict strong { color: var(--gray-900); font-weight: 500; display: block; margin-bottom: 4px; }
+
+  .score-row { margin-bottom: 1rem; }
+  .score-label-row {
+    display: flex; justify-content: space-between;
+    font-size: 13px; margin-bottom: 5px;
+  }
+  .score-label { color: var(--gray-600); font-weight: 400; }
+  .score-val { color: var(--gray-900); font-weight: 500; }
+  .score-bar-track {
+    height: 6px; background: var(--gray-50);
+    border-radius: 3px; overflow: hidden;
+    border: 1px solid var(--gray-100);
+  }
+  .score-bar-fill {
+    height: 100%; border-radius: 3px;
+    background: var(--green-200);
+    transition: width 0.6s ease;
+  }
+  .score-bar-fill.mid { background: #EF9F27; }
+
+  /* Pros/Cons */
+  .pros-cons {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1rem; margin-bottom: 2rem;
+  }
+  .pro-con-box {
+    background: var(--white);
+    border: 1px solid var(--gray-100);
+    border-radius: 12px; padding: 1.25rem;
+  }
+  .pro-con-box h3 {
+    font-size: 13px; font-weight: 500; letter-spacing: 0.05em;
+    text-transform: uppercase; margin-bottom: 0.75rem;
+  }
+  .pro-con-box.pros h3 { color: var(--green-600); }
+  .pro-con-box.cons h3 { color: #993C1D; }
+  .pro-con-list { list-style: none; }
+  .pro-con-list li {
+    font-size: 14px; color: var(--gray-800);
+    padding: 5px 0; padding-left: 1.25rem;
+    position: relative; font-weight: 300;
+    border-bottom: 1px solid var(--gray-50);
+  }
+  .pro-con-list li:last-child { border-bottom: none; }
+  .pro-con-list li::before {
+    position: absolute; left: 0;
+    font-size: 12px; top: 6px;
+  }
+  .pros .pro-con-list li::before { content: '✓'; color: var(--green-600); }
+  .cons .pro-con-list li::before { content: '✕'; color: #993C1D; }
+
+  /* Article body */
+  .review-body h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem; font-weight: 600;
+    color: var(--gray-900); margin: 2rem 0 0.75rem;
+  }
+  .review-body p {
+    font-size: 15px; color: var(--gray-800);
+    font-weight: 300; line-height: 1.75;
+    margin-bottom: 1rem;
+  }
+  .review-body .callout {
+    background: var(--green-50);
+    border-left: 3px solid var(--green-200);
+    border-radius: 0 8px 8px 0;
+    padding: 1rem 1.25rem;
+    margin: 1.25rem 0;
+    font-size: 14px; color: var(--green-800);
+    font-weight: 400; line-height: 1.6;
+  }
+
+  /* Sidebar */
+  .review-sidebar {}
+  .sidebar-card {
+    background: var(--white);
+    border: 1px solid var(--gray-100);
+    border-radius: 12px; padding: 1.5rem;
+    margin-bottom: 1.25rem;
+    position: sticky; top: 80px;
+  }
+  .sidebar-card h3 {
+    font-size: 13px; font-weight: 500;
+    text-transform: uppercase; letter-spacing: 0.05em;
+    color: var(--gray-600); margin-bottom: 1rem;
+  }
+  .buy-btn {
+    display: block; width: 100%;
+    background: var(--green-600); color: var(--white);
+    border: none; border-radius: 8px;
+    padding: 0.9rem; font-family: 'DM Sans', sans-serif;
+    font-size: 15px; font-weight: 500; cursor: pointer;
+    text-align: center; text-decoration: none;
+    transition: background 0.15s; margin-bottom: 0.75rem;
+  }
+  .buy-btn:hover { background: var(--green-800); }
+  .buy-btn.secondary {
+    background: var(--white); color: var(--green-600);
+    border: 1.5px solid var(--green-200);
+  }
+  .buy-btn.secondary:hover { background: var(--green-50); }
+  .sidebar-specs { width: 100%; border-collapse: collapse; }
+  .sidebar-specs td {
+    padding: 7px 0;
+    border-bottom: 1px solid var(--gray-50);
+    font-size: 13px;
+  }
+  .sidebar-specs td:first-child { color: var(--gray-600); font-weight: 400; }
+  .sidebar-specs td:last-child { color: var(--gray-900); font-weight: 500; text-align: right; }
+  .sidebar-specs tr:last-child td { border-bottom: none; }
+
+  /* CATEGORY PAGE */
+  .cat-page-header {
+    background: var(--white);
+    border-bottom: 1px solid var(--gray-100);
+    padding: 3rem 2rem;
+  }
+  .cat-page-header-inner { max-width: 1140px; margin: 0 auto; }
+  .cat-page-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem; font-weight: 600;
+    letter-spacing: -0.02em; margin-bottom: 0.5rem;
+  }
+  .cat-page-header p { font-size: 15px; color: var(--gray-600); font-weight: 300; max-width: 520px; }
+
+  .filter-bar {
+    max-width: 1140px; margin: 0 auto;
+    padding: 1.5rem 2rem;
+    display: flex; gap: 0.75rem; flex-wrap: wrap;
+    border-bottom: 1px solid var(--gray-100);
+  }
+  .filter-pill {
+    padding: 6px 14px;
+    border: 1px solid var(--gray-100);
+    border-radius: 20px; font-size: 13px;
+    color: var(--gray-600); background: var(--white);
+    cursor: pointer; transition: all 0.15s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .filter-pill:hover, .filter-pill.active {
+    background: var(--green-50);
+    border-color: var(--green-200);
+    color: var(--green-800);
+  }
+
+  .cat-reviews-list { max-width: 1140px; margin: 0 auto; padding: 2rem; }
+  .list-review-card {
+    background: var(--white);
+    border: 1px solid var(--gray-100);
+    border-radius: 12px;
+    display: grid; grid-template-columns: 100px 1fr auto;
+    gap: 1.5rem; align-items: center;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 0.75rem;
+    cursor: pointer;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .list-review-card:hover {
+    border-color: var(--green-200);
+    box-shadow: 0 4px 20px rgba(59,109,17,0.06);
+  }
+  .list-img {
+    width: 90px; height: 70px;
+    background: var(--gray-50);
+    border-radius: 8px;
+    border: 1px solid var(--gray-100);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2rem;
+  }
+  .list-info h3 { font-size: 15px; font-weight: 500; color: var(--gray-900); margin-bottom: 4px; }
+  .list-info p { font-size: 13px; color: var(--gray-600); font-weight: 300; line-height: 1.5; }
+  .list-score {
+    text-align: center; flex-shrink: 0;
+  }
+  .list-score-num {
+    width: 52px; height: 52px;
+    border-radius: 10px;
+    background: var(--green-50);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem; font-weight: 500; color: var(--green-800);
+    margin: 0 auto 4px;
+  }
+  .list-score-label { font-size: 11px; color: var(--gray-600); }
+
+  /* FOOTER */
+  footer {
+    background: var(--gray-900);
+    color: var(--gray-200);
+    padding: 3rem 2rem 2rem;
+    margin-top: 4rem;
+  }
+  .footer-inner { max-width: 1140px; margin: 0 auto; }
+  .footer-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem; margin-bottom: 2rem;
+  }
+  .footer-brand .logo { color: var(--green-100); font-size: 1.1rem; }
+  .footer-brand p { font-size: 13px; color: var(--gray-200); margin-top: 0.75rem; font-weight: 300; line-height: 1.6; max-width: 260px; }
+  footer h4 { font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray-100); margin-bottom: 1rem; }
+  footer ul { list-style: none; }
+  footer ul li { margin-bottom: 0.5rem; }
+  footer ul li a { font-size: 13px; color: var(--gray-200); text-decoration: none; font-weight: 300; }
+  footer ul li a:hover { color: var(--green-100); }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 1.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 0.5rem;
+  }
+  .footer-bottom p { font-size: 12px; color: var(--gray-200); font-weight: 300; }
+  .disclaimer { font-size: 11px; color: var(--gray-200); font-weight: 300; opacity: 0.7; max-width: 600px; }
+
+  @media (max-width: 900px) {
+    .categories-grid { grid-template-columns: repeat(2, 1fr); }
+    .reviews-grid { grid-template-columns: repeat(2, 1fr); }
+    .review-page-wrap { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 600px) {
+    .categories-grid { grid-template-columns: 1fr; }
+    .reviews-grid { grid-template-columns: 1fr; }
+    .pros-cons { grid-template-columns: 1fr; }
+    .list-review-card { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="#" onclick="showPage('home')">Real<span>Health</span>Reviews</a>
+    <div class="nav-links">
+      <a href="#" onclick="showPage('home')" class="active" id="nav-home">Home</a>
+      <a href="#" onclick="showCategoryPage('supplements')" id="nav-supps">Supplements</a>
+      <a href="#" onclick="showCategoryPage('fitness')" id="nav-fit">Fitness</a>
+      <a href="#" onclick="showCategoryPage('diet')" id="nav-diet">Diet & Nutrition</a>
+      <a href="#" onclick="showPage('about')" id="nav-about">Our Methodology</a>
+    </div>
+    <a class="nav-links nav-cta" href="#">Newsletter</a>
+  </div>
+</nav>
+
+<!-- ===== HOME PAGE ===== -->
+<div class="page active" id="page-home">
+
+  <div class="hero">
+    <p class="hero-eyebrow">Evidence-based health reviews</p>
+    <h1>Health decisions backed by <em>real research</em></h1>
+    <p>We rigorously review supplements, fitness activities, and diets so you can make informed decisions for your body.</p>
+    <div class="hero-search">
+      <input type="text" placeholder="Search supplements, activities, diets…" />
+      <button>Search</button>
+    </div>
+  </div>
+
+  <div class="trust-bar">
+    <div class="trust-bar-inner">
+      <div class="trust-item">
+        <div class="trust-icon">
+          <svg viewBox="0 0 10 10" fill="none"><polyline points="2,5 4,7 8,3" stroke="#3B6D11" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        Research-backed methodology
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">
+          <svg viewBox="0 0 10 10" fill="none"><polyline points="2,5 4,7 8,3" stroke="#3B6D11" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        No brand sponsorships
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">
+          <svg viewBox="0 0 10 10" fill="none"><polyline points="2,5 4,7 8,3" stroke="#3B6D11" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        Expert-reviewed content
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">
+          <svg viewBox="0 0 10 10" fill="none"><polyline points="2,5 4,7 8,3" stroke="#3B6D11" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        Updated regularly
+      </div>
+    </div>
+  </div>
+
+  <!-- Categories -->
+  <div class="section">
+    <div class="section-header">
+      <h2 class="section-title">Browse by category</h2>
+    </div>
+    <div class="categories-grid">
+      <a class="cat-card" href="#" onclick="showCategoryPage('supplements')">
+        <div class="cat-icon green"><i data-lucide="pill" style="width:22px;height:22px;stroke:var(--green-600);stroke-width:1.5;fill:none;"></i></div>
+        <h3>Supplements</h3>
+        <p>Vitamins, minerals, protein powders, nootropics & more</p>
+        <div class="cat-count">47 reviews</div>
+      </a>
+      <a class="cat-card" href="#" onclick="showCategoryPage('fitness')">
+        <div class="cat-icon teal"><i data-lucide="activity" style="width:22px;height:22px;stroke:var(--teal-600);stroke-width:1.5;fill:none;"></i></div>
+        <h3>Fitness Activities</h3>
+        <p>Running, yoga, HIIT, strength training & more</p>
+        <div class="cat-count">31 reviews</div>
+      </a>
+      <a class="cat-card" href="#" onclick="showCategoryPage('diet')">
+        <div class="cat-icon amber"><i data-lucide="salad" style="width:22px;height:22px;stroke:var(--amber-600);stroke-width:1.5;fill:none;"></i></div>
+        <h3>Diet & Nutrition</h3>
+        <p>Keto, Mediterranean, intermittent fasting & more</p>
+        <div class="cat-count">24 reviews</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Latest Reviews -->
+  <div style="background: var(--white); border-top: 1px solid var(--gray-100); border-bottom: 1px solid var(--gray-100);">
+    <div class="section">
+      <div class="section-header">
+        <h2 class="section-title">Latest reviews</h2>
+        <a class="section-link" href="#">View all →</a>
+      </div>
+      <div class="reviews-grid">
+        <div class="review-card" onclick="showReviewPage('magnesium')">
+          <div class="review-card-img"><i data-lucide="pill" style="width:40px;height:40px;stroke:var(--gray-200);stroke-width:1.2;fill:none;"></i></div>
+          <div class="review-card-body">
+            <span class="review-cat-tag">Supplement</span>
+            <h3>Magnesium Glycinate: Is it worth the hype?</h3>
+            <div class="review-card-meta">
+              <div class="score-badge score-high">8.4</div>
+              <div class="review-verdict">Strong evidence for sleep and muscle recovery. A solid addition for most adults.</div>
+            </div>
+          </div>
+        </div>
+        <div class="review-card" onclick="showReviewPage('running')">
+          <div class="review-card-img"><i data-lucide="activity" style="width:40px;height:40px;stroke:var(--gray-200);stroke-width:1.2;fill:none;"></i></div>
+          <div class="review-card-body">
+            <span class="review-cat-tag">Fitness</span>
+            <h3>Running: A complete evidence review</h3>
+            <div class="review-card-meta">
+              <div class="score-badge score-high">9.1</div>
+              <div class="review-verdict">One of the most well-studied forms of exercise. Benefits are broad and consistent.</div>
+            </div>
+          </div>
+        </div>
+        <div class="review-card" onclick="showPage('home')">
+          <div class="review-card-img"><i data-lucide="heart" style="width:40px;height:40px;stroke:var(--gray-200);stroke-width:1.2;fill:none;"></i></div>
+          <div class="review-card-body">
+            <span class="review-cat-tag">Diet</span>
+            <h3>Mediterranean Diet: Breaking down the science</h3>
+            <div class="review-card-meta">
+              <div class="score-badge score-high">8.8</div>
+              <div class="review-verdict">Among the most studied dietary patterns, with consistent cardiovascular benefits.</div>
+            </div>
+          </div>
+        </div>
+        <div class="review-card" onclick="showPage('home')">
+          <div class="review-card-img"><i data-lucide="sun" style="width:40px;height:40px;stroke:var(--gray-200);stroke-width:1.2;fill:none;"></i></div>
+          <div class="review-card-body">
+            <span class="review-cat-tag">Supplement</span>
+            <h3>Vitamin D3: Who actually needs it?</h3>
+            <div class="review-card-meta">
+              <div class="score-badge score-high">7.9</div>
+              <div class="review-verdict">Context-dependent. Deficient individuals see clear benefits; replete individuals less so.</div>
+            </div>
+          </div>
+        </div>
+        <div class="review-card" onclick="showPage('home')">
+          <div class="review-card-img"><i data-lucide="wind" style="width:40px;height:40px;stroke:var(--gray-200);stroke-width:1.2;fill:none;"></i></div>
+          <div class="review-card-body">
+            <span class="review-cat-tag">Fitness</span>
+            <h3>Yoga: Mental and physical benefits reviewed</h3>
+            <div class="review-card-meta">
+              <div class="score-badge score-mid">6.7</div>
+              <div class="review-verdict">Strong mental health evidence. Physical benefits are real but more modest than claimed.</div>
+            </div>
+          </div>
+        </div>
+        <div class="review-card" onclick="showPage('home')">
+          <div class="review-card-img"><i data-lucide="clock" style="width:40px;height:40px;stroke:var(--gray-200);stroke-width:1.2;fill:none;"></i></div>
+          <div class="review-card-body">
+            <span class="review-cat-tag">Diet</span>
+            <h3>Intermittent Fasting: What the studies show</h3>
+            <div class="review-card-meta">
+              <div class="score-badge score-mid">7.2</div>
+              <div class="review-verdict">Weight loss effects largely match calorie restriction. Metabolic benefits are promising.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Methodology teaser -->
+  <div class="section" style="text-align: center; padding: 5rem 2rem;">
+    <p class="hero-eyebrow">How we work</p>
+    <h2 style="font-family:'Playfair Display',serif; font-size:1.8rem; font-weight:600; letter-spacing:-0.02em; margin-bottom:1rem;">Our review methodology</h2>
+    <p style="color:var(--gray-600); font-weight:300; max-width:480px; margin:0 auto 2.5rem;">Every review is grounded in published research. We evaluate study quality, effect sizes, and real-world applicability — not marketing claims.</p>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; max-width:800px; margin:0 auto;">
+        <div style="text-align:left;">
+          <div style="margin-bottom:0.75rem;"><i data-lucide="microscope" style="width:26px;height:26px;stroke:var(--green-600);stroke-width:1.5;fill:none;"></i></div>
+          <h4 style="font-size:14px; font-weight:500; margin-bottom:0.4rem;">Literature review</h4>
+          <p style="font-size:13px; color:var(--gray-600); font-weight:300;">We scan peer-reviewed databases and prioritize RCTs and meta-analyses.</p>
+        </div>
+        <div style="text-align:left;">
+          <div style="margin-bottom:0.75rem;"><i data-lucide="bar-chart-2" style="width:26px;height:26px;stroke:var(--green-600);stroke-width:1.5;fill:none;"></i></div>
+          <h4 style="font-size:14px; font-weight:500; margin-bottom:0.4rem;">Evidence grading</h4>
+          <p style="font-size:13px; color:var(--gray-600); font-weight:300;">We score each claim on evidence strength, consistency, and study quality.</p>
+        </div>
+        <div style="text-align:left;">
+          <div style="margin-bottom:0.75rem;"><i data-lucide="file-text" style="width:26px;height:26px;stroke:var(--green-600);stroke-width:1.5;fill:none;"></i></div>
+          <h4 style="font-size:14px; font-weight:500; margin-bottom:0.4rem;">Plain-language verdict</h4>
+          <p style="font-size:13px; color:var(--gray-600); font-weight:300;">We translate findings into clear takeaways you can act on.</p>
+        </div>
+      </div>
+  </div>
+
+</div><!-- /page-home -->
+
+
+<!-- ===== CATEGORY PAGE ===== -->
+<div class="page" id="page-category">
+  <div class="cat-page-header">
+    <div class="cat-page-header-inner">
+      <p class="hero-eyebrow" id="cat-eyebrow">Category</p>
+      <h1 id="cat-title">Supplements</h1>
+      <p id="cat-desc">Independent, evidence-based reviews of popular supplements.</p>
+    </div>
+  </div>
+  <div class="filter-bar">
+    <button class="filter-pill active">All</button>
+    <button class="filter-pill" id="filter-1">—</button>
+    <button class="filter-pill" id="filter-2">—</button>
+    <button class="filter-pill" id="filter-3">—</button>
+  </div>
+  <div class="cat-reviews-list" id="cat-list"></div>
+</div>
+
+
+<!-- ===== REVIEW PAGE ===== -->
+<div class="page" id="page-review">
+  <div class="review-page-wrap">
+    <div class="review-main">
+      <div class="review-breadcrumb">
+        <a onclick="showPage('home')">Home</a> ›
+        <a id="review-breadcrumb-cat" onclick="showCategoryPage('supplements')">Supplements</a> ›
+        <span id="review-breadcrumb-title">Magnesium Glycinate</span>
+      </div>
+      <div class="review-header-img" id="review-hero-img"><i data-lucide="pill" style="width:64px;height:64px;stroke:var(--gray-200);stroke-width:1.2;fill:none;"></i></div>
+      <div class="review-tag-row">
+        <span class="review-cat-tag" id="review-tag">Supplement</span>
+        <span class="review-cat-tag" style="background:var(--gray-50);color:var(--gray-600);">Last updated: March 2026</span>
+      </div>
+      <h1 class="review-page-title" id="review-title">Magnesium Glycinate Review</h1>
+      <p class="review-subtitle" id="review-subtitle">A comprehensive look at the evidence for magnesium glycinate supplementation: who benefits, how much to take, and what the research actually shows.</p>
+      <div class="review-meta-row">
+        <div class="review-meta-item"><strong>Form</strong>Capsule / powder</div>
+        <div class="review-meta-item"><strong>Common dose</strong>200–400mg elemental Mg</div>
+        <div class="review-meta-item"><strong>Evidence quality</strong>Moderate–High</div>
+        <div class="review-meta-item"><strong>Best for</strong>Sleep, muscle recovery</div>
+      </div>
+
+      <!-- Scores -->
+      <div class="score-section">
+        <h2>Our scores</h2>
+        <div class="overall-score-row">
+          <div class="big-score" id="review-overall-score">8.4</div>
+          <div class="overall-verdict">
+            <strong>Recommended with caveats</strong>
+            Magnesium glycinate has good bioavailability and solid evidence for sleep quality and muscle cramp reduction. Most effective in people who are deficient — which is a surprisingly large portion of the population.
+          </div>
+        </div>
+        <div id="score-bars"></div>
+      </div>
+
+      <!-- Pros/Cons -->
+      <div class="pros-cons">
+        <div class="pro-con-box pros">
+          <h3>Pros</h3>
+          <ul class="pro-con-list" id="review-pros">
+            <li>High bioavailability vs. other Mg forms</li>
+            <li>Strong evidence for sleep improvement</li>
+            <li>Well-tolerated, gentle on digestion</li>
+            <li>Supports muscle relaxation & recovery</li>
+            <li>May reduce anxiety symptoms</li>
+          </ul>
+        </div>
+        <div class="pro-con-box cons">
+          <h3>Cons</h3>
+          <ul class="pro-con-list" id="review-cons">
+            <li>More expensive than magnesium oxide</li>
+            <li>Benefits reduced if already replete</li>
+            <li>Can interact with certain medications</li>
+            <li>Some studies are small-scale</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Body -->
+      <div class="review-body" id="review-body">
+        <h2>What is magnesium glycinate?</h2>
+        <p>Magnesium glycinate is a chelated form of magnesium — meaning the mineral is bonded to the amino acid glycine. This bonding improves absorption in the gut and reduces the laxative effect associated with cheaper forms like magnesium oxide or sulfate.</p>
+        <p>Magnesium is involved in over 300 enzymatic reactions in the body, including protein synthesis, muscle and nerve function, blood glucose control, and blood pressure regulation. Despite its importance, studies suggest that a significant portion of adults in Western countries don't meet the recommended daily intake through diet alone.</p>
+
+        <div class="callout">
+          <strong>Key takeaway:</strong> If you're considering magnesium supplementation, glycinate is one of the better-absorbed forms available and is worth the slightly higher cost over oxide.
+        </div>
+
+        <h2>What does the evidence say?</h2>
+        <p>The strongest evidence for magnesium glycinate centers on three areas: sleep quality, muscle function, and mood. Multiple randomized controlled trials have found that magnesium supplementation in deficient populations improves subjective sleep quality, reduces time to fall asleep, and decreases nighttime waking.</p>
+        <p>For muscle cramps and recovery, the evidence is good — particularly for athletes and pregnant women, two populations frequently low in magnesium. Several meta-analyses support its use for exercise-related muscle cramps, though the evidence for general nocturnal leg cramps is mixed.</p>
+
+        <h2>Who benefits most?</h2>
+        <p>People most likely to benefit are those with low dietary intake (common in diets high in processed foods), older adults whose absorption decreases with age, people with type 2 diabetes, and those who consume alcohol regularly. Athletes in heavy training may also benefit due to increased magnesium losses through sweat.</p>
+        <p>If your magnesium status is already adequate, benefits are likely to be modest. This is a consistent finding across many micronutrient studies — supplementation corrects a deficit; it doesn't provide a supercharge above normal levels.</p>
+
+        <h2>Dosage and safety</h2>
+        <p>Typical effective doses range from 200–400mg of elemental magnesium per day. Magnesium glycinate capsules often contain 100–200mg of elemental magnesium per dose. The tolerable upper intake level set by health authorities is 350mg/day from supplements (above dietary intake), so stay within this range unless directed by a clinician.</p>
+        <p>Side effects are rare at standard doses. Very high doses can cause loose stools or diarrhea, though this is far less common with glycinate than oxide forms. Consult a doctor if you take medications including diuretics, antibiotics, or bisphosphonates.</p>
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="review-sidebar">
+      <div class="sidebar-card">
+        <h3>Where to buy</h3>
+        <a class="buy-btn" href="#" onclick="return false;">View on Amazon →</a>
+        <a class="buy-btn secondary" href="#" onclick="return false;">Compare prices</a>
+        <p style="font-size:11px; color:var(--gray-600); margin-top:0.75rem; font-weight:300; line-height:1.5;">
+          We may earn a small commission on purchases. This never influences our reviews.
+        </p>
+      </div>
+      <div class="sidebar-card">
+        <h3>Quick specs</h3>
+        <table class="sidebar-specs">
+          <tr><td>Category</td><td>Supplement</td></tr>
+          <tr><td>Our score</td><td>8.4 / 10</td></tr>
+          <tr><td>Evidence</td><td>Moderate–High</td></tr>
+          <tr><td>Dose</td><td>200–400mg</td></tr>
+          <tr><td>Timing</td><td>Evening</td></tr>
+          <tr><td>Safety</td><td>Well-tolerated</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div><!-- /page-review -->
+
+
+<!-- ===== ABOUT PAGE ===== -->
+<div class="page" id="page-about">
+  <div style="max-width:740px; margin:0 auto; padding:4rem 2rem;">
+    <p class="hero-eyebrow">How we work</p>
+    <h1 style="font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:600;letter-spacing:-0.02em;margin-bottom:1rem;">Our review methodology</h1>
+    <p style="font-size:15px;color:var(--gray-600);font-weight:300;line-height:1.75;margin-bottom:2rem;">RealHealthReview was built on a simple premise: most health content online is driven by affiliate incentives, not evidence. We do it differently.</p>
+
+    <div style="border-left:3px solid var(--green-200);padding-left:1.5rem;margin-bottom:2rem;">
+      <p style="font-size:1rem;color:var(--gray-800);font-weight:400;line-height:1.7;">Every review starts with a systematic search of peer-reviewed literature. We grade the evidence before writing a single word of the review.</p>
+    </div>
+
+    <h2 style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:600;margin-bottom:0.75rem;">Our scoring system</h2>
+    <p style="font-size:15px;color:var(--gray-600);font-weight:300;margin-bottom:1.5rem;">Each review receives a score out of 10, reflecting a weighted average across five dimensions:</p>
+    <div style="background:var(--white);border:1px solid var(--gray-100);border-radius:12px;padding:1.5rem;margin-bottom:2rem;">
+      <table style="width:100%;border-collapse:collapse;font-size:14px;">
+        <thead><tr style="border-bottom:1px solid var(--gray-100);">
+          <th style="text-align:left;padding:8px 0;font-weight:500;color:var(--gray-900);">Dimension</th>
+          <th style="text-align:right;padding:8px 0;font-weight:500;color:var(--gray-900);">Weight</th>
+        </tr></thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--gray-50);"><td style="padding:8px 0;color:var(--gray-600);">Evidence quality (study design)</td><td style="text-align:right;color:var(--gray-900);font-weight:500;">30%</td></tr>
+          <tr style="border-bottom:1px solid var(--gray-50);"><td style="padding:8px 0;color:var(--gray-600);">Evidence consistency across studies</td><td style="text-align:right;color:var(--gray-900);font-weight:500;">25%</td></tr>
+          <tr style="border-bottom:1px solid var(--gray-50);"><td style="padding:8px 0;color:var(--gray-600);">Effect size (how much does it actually work?)</td><td style="text-align:right;color:var(--gray-900);font-weight:500;">25%</td></tr>
+          <tr style="border-bottom:1px solid var(--gray-50);"><td style="padding:8px 0;color:var(--gray-600);">Safety profile</td><td style="text-align:right;color:var(--gray-900);font-weight:500;">10%</td></tr>
+          <tr><td style="padding:8px 0;color:var(--gray-600);">Practical applicability</td><td style="text-align:right;color:var(--gray-900);font-weight:500;">10%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:15px;color:var(--gray-600);font-weight:300;line-height:1.75;">Affiliate links are disclosed on every page where they appear. Commission rates do not influence scores — a supplement with a generous affiliate program scores no higher than one without.</p>
+  </div>
+</div>
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="logo" href="#" onclick="showPage('home')">Real<span style="color:#D3D1C7">Health</span>Reviews</a>
+        <p>Evidence-based health reviews. We read the research so you don't have to.</p>
+      </div>
+      <div>
+        <h4>Categories</h4>
+        <ul>
+          <li><a href="#" onclick="showCategoryPage('supplements')">Supplements</a></li>
+          <li><a href="#" onclick="showCategoryPage('fitness')">Fitness Activities</a></li>
+          <li><a href="#" onclick="showCategoryPage('diet')">Diet & Nutrition</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Site</h4>
+        <ul>
+          <li><a href="#" onclick="showPage('about')">Methodology</a></li>
+          <li><a href="#">About us</a></li>
+          <li><a href="#">Newsletter</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy policy</a></li>
+          <li><a href="#">Disclaimer</a></li>
+          <li><a href="#">Affiliate disclosure</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 RealHealthReviews.com — All rights reserved.</p>
+      <p class="disclaimer">Content is for informational purposes only and does not constitute medical advice. Always consult a qualified healthcare professional.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+const categoryData = {
+  supplements: {
+    title: 'Supplements',
+    eyebrow: 'Evidence-based supplement reviews',
+    desc: 'We evaluate the research behind popular supplements — separating hype from genuine benefit.',
+    filters: ['All', 'Vitamins', 'Minerals', 'Performance'],
+    items: [
+      { icon: 'pill', title: 'Magnesium Glycinate', desc: 'Strong bioavailability and solid evidence for sleep quality and muscle recovery.', score: '8.4', key: 'magnesium' },
+      { icon: 'sun', title: 'Vitamin D3', desc: 'Context-dependent benefits — most valuable for deficient individuals.', score: '7.9', key: null },
+      { icon: 'droplets', title: 'Omega-3 Fish Oil', desc: 'Clear cardiovascular benefits at adequate doses. Quality varies significantly by brand.', score: '8.1', key: null },
+      { icon: 'zap', title: 'Creatine Monohydrate', desc: 'Among the best-evidenced supplements for strength and power performance.', score: '9.2', key: null },
+      { icon: 'leaf', title: 'Ashwagandha', desc: 'Consistent stress and cortisol reduction in RCTs. Adaptogen hype somewhat warranted.', score: '7.4', key: null },
+      { icon: 'brain', title: "Lion's Mane Mushroom", desc: 'Promising cognitive data, but most studies are small and short-term. Watch this space.', score: '6.1', key: null },
+    ]
+  },
+  fitness: {
+    title: 'Fitness Activities',
+    eyebrow: 'Evidence-based fitness reviews',
+    desc: 'What does the science say about popular forms of exercise? We break down what works, for whom, and why.',
+    filters: ['All', 'Cardio', 'Strength', 'Mind-body'],
+    items: [
+      { icon: 'activity', title: 'Running', desc: 'One of the most well-studied forms of exercise with broad, consistent benefits for cardiovascular and mental health.', score: '9.1', key: 'running' },
+      { icon: 'wind', title: 'Yoga', desc: 'Strong mental health evidence. Physical benefits are real but more modest than typically claimed.', score: '6.7', key: null },
+      { icon: 'dumbbell', title: 'Strength Training', desc: 'Exceptional evidence for body composition, metabolic health, and longevity markers at all ages.', score: '9.3', key: null },
+      { icon: 'timer', title: 'HIIT', desc: 'Time-efficient cardiovascular gains, but not meaningfully superior to steady-state for most outcomes.', score: '7.8', key: null },
+      { icon: 'bike', title: 'Cycling', desc: 'Low-impact cardio with strong evidence for cardiovascular health and joint-friendly exercise.', score: '8.5', key: null },
+    ]
+  },
+  diet: {
+    title: 'Diet & Nutrition',
+    eyebrow: 'Evidence-based diet reviews',
+    desc: 'Cutting through the noise on popular dietary approaches — what the research shows about sustainability and health outcomes.',
+    filters: ['All', 'Weight loss', 'Cardiovascular', 'Metabolic'],
+    items: [
+      { icon: 'heart', title: 'Mediterranean Diet', desc: 'Among the most studied dietary patterns globally, with consistent cardiovascular and cognitive benefits.', score: '8.8', key: null },
+      { icon: 'clock', title: 'Intermittent Fasting', desc: 'Weight loss effects largely match standard calorie restriction. Metabolic benefits are promising.', score: '7.2', key: null },
+      { icon: 'flame', title: 'Ketogenic Diet', desc: 'Effective for short-term weight loss and seizure management. Long-term adherence and safety data is limited.', score: '6.4', key: null },
+      { icon: 'leaf', title: 'Plant-Based Diets', desc: 'Strong evidence for cardiovascular and cancer risk reduction. Requires attention to specific nutrients.', score: '8.3', key: null },
+      { icon: 'shield', title: 'DASH Diet', desc: 'Specifically designed and well-evidenced for blood pressure reduction. Broadly healthy eating pattern.', score: '8.6', key: null },
+    ]
+  }
+};
+
+const reviewData = {
+  magnesium: {
+    cat: 'supplements', catLabel: 'Supplements',
+    icon: 'pill', tag: 'Supplement',
+    title: 'Magnesium Glycinate Review',
+    subtitle: 'A comprehensive look at the evidence for magnesium glycinate supplementation: who benefits, how much to take, and what the research actually shows.',
+    overallScore: '8.4',
+    scores: [
+      { label: 'Evidence quality', val: 8, display: '8.0' },
+      { label: 'Consistency across studies', val: 8.5, display: '8.5' },
+      { label: 'Effect size', val: 7.5, display: '7.5' },
+      { label: 'Safety profile', val: 9.5, display: '9.5' },
+      { label: 'Practical applicability', val: 8.5, display: '8.5' },
+    ]
+  },
+  running: {
+    cat: 'fitness', catLabel: 'Fitness Activities',
+    icon: 'activity', tag: 'Fitness Activity',
+    title: 'Running: A Complete Evidence Review',
+    subtitle: 'Is running as good for you as everyone says? We review the research across cardiovascular health, mental wellbeing, longevity, and injury risk.',
+    overallScore: '9.1',
+    scores: [
+      { label: 'Evidence quality', val: 9.5, display: '9.5' },
+      { label: 'Consistency across studies', val: 9, display: '9.0' },
+      { label: 'Effect size', val: 9, display: '9.0' },
+      { label: 'Safety profile', val: 7.5, display: '7.5' },
+      { label: 'Practical applicability', val: 9.5, display: '9.5' },
+    ]
+  }
+};
+
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  const nav = document.getElementById('nav-' + id);
+  if (nav) nav.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function showCategoryPage(cat) {
+  const data = categoryData[cat];
+  document.getElementById('cat-eyebrow').textContent = data.eyebrow;
+  document.getElementById('cat-title').textContent = data.title;
+  document.getElementById('cat-desc').textContent = data.desc;
+
+  const filters = ['filter-1','filter-2','filter-3'];
+  data.filters.slice(1).forEach((f,i) => {
+    const el = document.getElementById(filters[i]);
+    if (el) el.textContent = f;
+  });
+
+  document.querySelectorAll('.filter-pill').forEach((p,i) => {
+    p.classList.toggle('active', i === 0);
+  });
+
+  const list = document.getElementById('cat-list');
+  list.innerHTML = data.items.map(item => `
+    <div class="list-review-card" onclick="${item.key ? "showReviewPage('" + item.key + "')" : "showCategoryPage('" + cat + "')"}">
+      <div class="list-img"><i data-lucide="${item.icon}" style="width:32px;height:32px;stroke:var(--gray-400);stroke-width:1.5;fill:none;"></i></div>
+      <div class="list-info">
+        <h3>${item.title}</h3>
+        <p>${item.desc}</p>
+      </div>
+      <div class="list-score">
+        <div class="list-score-num">${item.score}</div>
+        <div class="list-score-label">out of 10</div>
+      </div>
+    </div>
+  `).join('');
+
+  showPage('category');
+  const navMap = { supplements: 'nav-supps', fitness: 'nav-fit', diet: 'nav-diet' };
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  const navEl = document.getElementById(navMap[cat]);
+  if (navEl) navEl.classList.add('active');
+  lucide.createIcons();
+}
+
+function showReviewPage(key) {
+  const data = reviewData[key];
+  document.getElementById('review-breadcrumb-cat').textContent = data.catLabel;
+  document.getElementById('review-breadcrumb-cat').setAttribute('onclick', "showCategoryPage('" + data.cat + "')");
+  document.getElementById('review-breadcrumb-title').textContent = data.title.split(':')[0].replace(' Review','');
+  document.getElementById('review-hero-img').innerHTML = `<i data-lucide="${data.icon}" style="width:64px;height:64px;stroke:var(--gray-200);stroke-width:1.2;fill:none;"></i>`;
+  document.getElementById('review-tag').textContent = data.tag;
+  document.getElementById('review-title').textContent = data.title;
+  document.getElementById('review-subtitle').textContent = data.subtitle;
+  document.getElementById('review-overall-score').textContent = data.overallScore;
+
+  const bars = document.getElementById('score-bars');
+  bars.innerHTML = data.scores.map(s => `
+    <div class="score-row">
+      <div class="score-label-row">
+        <span class="score-label">${s.label}</span>
+        <span class="score-val">${s.display}</span>
+      </div>
+      <div class="score-bar-track">
+        <div class="score-bar-fill ${s.val < 7 ? 'mid' : ''}" style="width:${s.val * 10}%"></div>
+      </div>
+    </div>
+  `).join('');
+
+  showPage('review');
+  lucide.createIcons();
+}
+
+document.querySelectorAll('.filter-pill').forEach(pill => {
+  pill.addEventListener('click', function() {
+    document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+
+document.addEventListener('DOMContentLoaded', () => lucide.createIcons());
+</script>
+</body>
+</html>
